@@ -1,29 +1,22 @@
 package main
 
-import "fmt"
-import "os"
+//import "fmt"
+import "log"
 import "net"
 import "net/rpc"
-import "nettest/mymath"
+import "github.com/dangogh/petulant-dangerzone/mymath"
 
 func main() {
+	const msgLen = 1024
+	rpc.Register(new(mymath.Quotient))
 
-	otherend := new(OtherEnd)
-	rpc.Register(otherend)
-	rpc.HandleHTTP()
+	// listen on the port
 	listen, err := net.Listen("tcp", ":1234")
 	if err != nil {
-		log.Fatal("dialing", err)
+		log.Fatal("listening...", err)
 	}
-	args := os.Args[1:]
-	
-	for idx, host := range args {
-		fmt.Println(idx, host)
-		_, err := net.Dial("udp", host)
-		if err != nil {
-			fmt.Println(" Caught ", err)
-			continue
-		}
-		fmt.Println(host)
+	for {
+		go rpc.Accept(listen)
+
 	}
 }
