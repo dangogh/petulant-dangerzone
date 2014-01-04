@@ -29,6 +29,7 @@ func (t *Arith) Divide(args *Args, quo *Quotient) error {
 }
 
 type mathConn struct {
+	net.Conn
 	readBuf  bytes.Buffer
 	writeBuf bytes.Buffer
 	A, B     int
@@ -52,8 +53,9 @@ func (c *mathConn) Close() error {
 	return nil
 }
 
-func handleConnection(c *mathConn) {
-	c.Write(([]byte{"HELLO!!"})
+func handleConnection(c net.Conn) {
+	fmt.Println("Got a connection ", c)
+	c.Write(bytes.NewBufferString("HELLO!!").Bytes())
 }
 
 func main() {
