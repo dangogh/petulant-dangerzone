@@ -1,12 +1,13 @@
 package main
 
-import "bytes"
-
-import "fmt"
-import "log"
-import "net"
-import "net/rpc"
-import "errors"
+import (
+	"bytes"
+	"errors"
+	"fmt"
+	"log"
+	"net"
+	"net/rpc"
+)
 
 // Arith
 type Args struct {
