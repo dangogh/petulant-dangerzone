@@ -36,8 +36,8 @@ func viewHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Printf("NOOOOO!!!   %v", err)
 	}
-	fmt.Fprintf(w, " page is %v", p)
-	//	fmt.Fprintf(w, "<h1>%v</h1><div>%v</div>", p.Title, p.Body)
+	//fmt.Fprintf(w, " page is %v", p)
+	fmt.Fprintf(w, "<h1>%s</h1><div>%s</div>", p.Title, p.Body)
 }
 
 func main() {
